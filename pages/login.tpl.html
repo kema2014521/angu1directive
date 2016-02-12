@@ -1,0 +1,104 @@
+
+    <style type="text/css">
+		#nav-bar {
+			display: none;
+		}
+        
+        .form-group {
+            width:250px;
+        }
+	</style>
+
+	
+	<!--Login-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+        <link href="vendor/googleButton.css" rel="stylesheet" type="text/css">
+
+        <script src="https://apis.google.com/js/platform.js?onload=startApp" async defer>               </script>
+        <script src="https://apis.google.com/js/api:client.js"></script>
+        
+       
+        <!--
+        <div class="g-sign-in-button" id="g-button" >
+			<span>SIGN IN WITH GOOGLE</span>
+			<i class="g-icon"></i>
+		</div>
+        -->
+
+       <div id="box" style="margin-bottom:10px">
+           <div id="gSignInWrapper" style="float:left">
+             <div id="customBtn" class="customGPlusSignIn">
+                <span class="icon"></span>
+                <span class="buttonText">Google</span>
+             </div>
+           </div>
+           
+           <div id="signOut" style="float:right">
+              <a href="#" ng-click="signOut()" no-click>Sign out</a>
+           </div>
+           
+           <div style="clear:both"></div>
+       
+       </div>
+        
+
+        <div ng-show="isSignIn" id="name"></div>
+
+
+        <hr/>
+       
+
+        <div></div>
+
+
+		<form name="formData.loginForm" ng-enter="login(user)" novalidate> <!-- novalidate prevents HTML5 validation since we will be validating ourselves -->
+
+        <!-- NAME -->
+        <div class="form-group"  ng-class="{ 'has-error': formData.loginForm.name.$touched && formData.loginForm.name.$invalid }">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" 
+                 ng-model="user.name"
+                 required>
+            
+            <div class="help-block" ng-messages="formData.loginForm.name.$error" 
+             ng-show="formData.loginForm.name.$touched">
+              <p ng-message="required">Your name is required.</p>
+            </div>
+        </div>
+        
+
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error': formData.loginForm.username.$touched && formData.loginForm.username.$invalid }">
+            <label>Username</label>
+            <input type="text" name="username" class="form-control" ng-model="user.username"   
+                   ng-minlength="3" ng-maxlength="8" required>
+             
+            <div class="help-block" ng-messages="formData.loginForm.username.$error" 
+             ng-show="formData.loginForm.username.$touched">
+              <p ng-message="minlength">Your username is too short.</p>
+              <p ng-message="maxlength">Your username is too long.</p>
+              <p ng-message="required">Your username is required.</p>
+            </div>
+        </div>
+        
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error': formData.loginForm.email.$touched && formData.loginForm.email.$invalid }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="user.email" required>
+        </div>
+        
+        
+    </form>
+
+        <!-- loadGAPI:onload callback-->
+<!-- Login BUTTON -->
+        <button ng-click="login(user)" class="btn btn-primary" 
+                ng-class="{disabled: formData.loginForm.$invalid}">
+                <span>Log in</span>
+				<i class="right-arrow-icon"></i>
+        
+        </button>
+        
+		
+		<a ui-sref="forgotpassword" style="margin-left:5px">Forgot Password?</a>
+		
